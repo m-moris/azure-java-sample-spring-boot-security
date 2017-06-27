@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Spring Boot and OAuth2 with AAD for Java</title>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="lib/angular/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="home">
+<div class="container">
+  <h1>Azure Active Directory Sample for Java</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+        <input ng-hide="authenticated" type="button" class="btn btn-primary" onClick="location.href='/login'" value="Login"/>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" ng-show="authenticated">
+      <h2>Principal</h2>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>name</th>
+          <th>value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(k,v) in detail">
+          <td>{{k}}</td>
+          <td>{{v}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+  angular.module("app", []).controller("home", function ($http, $scope) {
+    var self = $scope;
+    $http.get("/user").then(
+        function (response) {
+          var detail = response.data.userAuthentication.details;
+          self.detail = detail;
+          self.authenticated = true;
+        },
+        function () {
+          self.authenticated = false;
+        });
+  });
+</script>
+</body>
+</html>

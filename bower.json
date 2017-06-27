@@ -1,0 +1,9 @@
+{
+  "name": "adal.sample",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "jquery": "2.2.4",
+    "angular" :  "1.6.4"
+  }
+}

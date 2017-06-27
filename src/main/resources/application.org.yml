@@ -1,0 +1,24 @@
+security:
+  oauth2:
+    client:
+      clientId: <<your client id>>
+      clientSecret: << your client secret>>
+      accessTokenUri: https://login.microsoftonline.com/<<tenant id>>/oauth2/token
+      userAuthorizationUri: https://login.microsoftonline.com/<<tenant id>>/oauth2/authorize
+      clientAuthenticationScheme: form
+      scope: read
+    resource:
+      preferTokenInfo: false
+      userInfoUri: https://graph.windows.net/me?api-version=1.6
+      
+spring:
+  resources:
+    chain:
+      enabled: true
+      
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+aad:
+  resource: https://graph.windows.net
